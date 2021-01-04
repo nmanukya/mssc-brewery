@@ -8,6 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
 @RequestMapping("/api/v1/customer")
 @RestController
 public class CustomerController {
@@ -21,14 +26,14 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody Customer customer){
+    public ResponseEntity handlePost(@Valid @RequestBody Customer customer){
         Customer savedCustDetails=customerService.saveCustDetails(customer);
         HttpHeaders header = new HttpHeaders();
         header.add("Location", "/api/v1/customer/"+savedCustDetails.getCustomerName()+"/"+savedCustDetails.getId().toString());
         return new ResponseEntity(header, HttpStatus.CREATED);
     }
     @PutMapping("{customerId}")
-    public ResponseEntity handleUpdate(@PathVariable("customerId") Integer customerId, @RequestBody Customer customer){
+    public ResponseEntity handleUpdate(@PathVariable("customerId") Integer customerId, @Valid @RequestBody Customer customer){
         customerService.updateCustomer(customerId, customer);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -38,4 +43,6 @@ public class CustomerController {
     public void handleDelete(@PathVariable("customerId") Integer customerId){
         customerService.deleteById(customerId);
     }
+
+
 }

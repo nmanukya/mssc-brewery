@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class CustomerDto {
     private Integer id;
     @NotBlank
     @Size(min=3, max=100)

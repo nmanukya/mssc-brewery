@@ -1,6 +1,6 @@
 package guru.springframework.msscbrewery.services;
 
-import guru.springframework.msscbrewery.web.model.Customer;
+import guru.springframework.msscbrewery.web.model.CustomerDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
-    public Customer getCustomerById(Integer customerId) {
-        return Customer.builder().id(customerId)
+    public CustomerDto getCustomerById(Integer customerId) {
+        return CustomerDto.builder().id(customerId)
                 .customerName("Vazgen")
                 .build();
     }
 
     @Override
-    public Customer saveCustDetails(Customer customer) {
-        return Customer.builder().id(customer.getId())
-                .customerName(customer.getCustomerName())
+    public CustomerDto saveCustDetails(CustomerDto customerDto) {
+        return CustomerDto.builder().id(customerDto.getId())
+                .customerName(customerDto.getCustomerName())
                 .build();
     }
 
     @Override
-    public void updateCustomer(Integer customerId, Customer customer) {
+    public void updateCustomer(Integer customerId, CustomerDto customerDto) {
         //TODO implement updateCustomer
     }
 
